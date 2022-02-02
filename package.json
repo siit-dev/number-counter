@@ -49,9 +49,7 @@
     "type": "git",
     "url": "git+https://github.com/siit-dev/number-counter.git"
   },
-  "dependencies": {
-    "lit": "^2.1.2"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/cli": "^7.16.8",
     "@babel/core": "^7.16.10",
@@ -73,6 +71,7 @@
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
     "jest": "^27.4.7",
+    "lit": "^2.1.2",
     "mini-css-extract-plugin": "^2.5.2",
     "postcss": "^8.4.5",
     "postcss-loader": "^6.2.1",
