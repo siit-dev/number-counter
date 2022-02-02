@@ -2,6 +2,8 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const postcssConfig = require('./postcss.config');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const RemoveConsolePlugin = require('remove-console-webpack-plugin');
 
 const makeConfig = () => {
   const plugins = [
@@ -10,6 +12,14 @@ const makeConfig = () => {
       chunkFilename: '[id].css',
     }),
   ];
+
+  if (process.env.NODE_ENV === 'development') {
+    plugins.push(
+      new HtmlWebpackPlugin({
+        template: 'public/index.html',
+      })
+    );
+  }
 
   const config = {
     entry: {
@@ -22,12 +32,14 @@ const makeConfig = () => {
       libraryTarget: 'umd',
       globalObject: 'this',
     },
+    devServer: {
+      static: './public/',
+    },
     mode: 'production',
     module: {
       rules: [
         {
           test: /^(?!.*\.{test,min}\.(js|ts)x?$).*\.(js|ts)x?$/,
-          exclude: /node_modules/,
           use: [
             {
               loader: 'babel-loader',

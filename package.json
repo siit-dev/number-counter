@@ -1,13 +1,13 @@
 {
-  "name": "@smartimpact-it/npm-package-template",
+  "name": "@smartimpact-it/number-counter",
   "version": "0.0.1",
   "description": "A library to display do something.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
-  "module:src": "src/index.js",
+  "module:src": "src/index.ts",
   "umd:main": "dist/umd/index.js",
   "types": "dist/types/index.d.js",
-  "sideEffects": false,
+  "sideEffects": true,
   "authors": [
     {
       "name": "SmartImpact IT",
@@ -16,11 +16,10 @@
     }
   ],
   "license": "GPL-3",
-  "keywords": [
-  ],
+  "keywords": [],
   "scripts": {
     "test": "jest",
-    "watch": "webpack --progress --watch --color",
+    "watch": "webpack --progress --watch --color --config config/webpack.config.js",
     "format": "prettier --write \"src/**/**.{js,ts}\" \"**/*.md\"",
     "format:check": "prettier --list-different \"src/**/**.{js,ts}\" \"**/*.md\"",
     "pretest": "npm run build",
@@ -31,8 +30,9 @@
     "build:types": "node tools/cleanup types && tsc -p config/tsconfig.types.json",
     "clean": "node tools/cleanup",
     "package": "npm run build && npm pack",
-    "addscope": "node tools/packagejson name @smartimpact-it/npm-package-template",
-    "postversion": "git push --follow-tags"
+    "addscope": "node tools/packagejson name @smartimpact-it/number-counter",
+    "postversion": "git push --follow-tags",
+    "start": "cross-env NODE_ENV=development webpack serve --open --config config/webpack.config.js"
   },
   "publishConfig": {
     "access": "public"
@@ -47,10 +47,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/siit-dev/npm-package-template.git"
+    "url": "git+https://github.com/siit-dev/number-counter.git"
   },
   "dependencies": {
-
+    "lit": "^2.1.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.16.8",
@@ -71,22 +71,25 @@
     "cross-env": "^7.0.3",
     "css-loader": "^6.5.1",
     "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.0",
     "jest": "^27.4.7",
     "mini-css-extract-plugin": "^2.5.2",
     "postcss": "^8.4.5",
     "postcss-loader": "^6.2.1",
     "prettier": "^2.5.1",
+    "remove-console-webpack-plugin": "^0.2.0",
     "sass": "^1.49.0",
     "sass-loader": "^12.4.0",
     "typescript": "^4.5.4",
     "webpack": "^5.66.0",
     "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.7.4",
     "webpack-notifier": "^1.15.0"
   },
   "bugs": {
-    "url": "https://github.com/siit-dev/npm-package-template/issues"
+    "url": "https://github.com/siit-dev/number-counter/issues"
   },
-  "homepage": "https://github.com/siit-dev/npm-package-template",
+  "homepage": "https://github.com/siit-dev/number-counter",
   "jest": {
     "testEnvironment": "jsdom"
   }
