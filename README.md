@@ -41,7 +41,7 @@ If you want the animation to be paused whenever the element is hidden from the v
 | `pause-when-invisible` | `false`        | whether to pause when out of view                                       |
 | `root-margin`          | `0px`          | the root margins for the IntersectionObserver.                          |
 
-\*\*The custom format is also automatically "read" from the content if you do not provide the "final" attribute. For example, for the component below the custom format will be inferred to be `# ### ###`.
+**The custom format is also automatically "read" from the content if you do not provide the "final" attribute. For example, for the component below the custom format will be inferred to be `# ### ###`.**
 
 ```html
 <number-counter>1 230 502</number-counter>

@@ -131,8 +131,6 @@ export class NumberCounter extends LitElement {
       result[lastIndex] = digits[i];
     }
 
-    console.log('applying', digits.join(''), result.join(''));
-
     // only return the part of the pattern that has been used
     return result.join('').substring(lastIndex);
   }
