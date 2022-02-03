@@ -1,4 +1,4 @@
-# Example NPM package
+# Animated number counter web component
 
 This library allows developers to easily create an animated number counter.
 
