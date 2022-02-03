@@ -1,7 +1,7 @@
 {
   "name": "@smartimpact-it/number-counter",
   "version": "0.0.4",
-  "description": "A library to display do something.",
+  "description": "A library to easily create an animated number counter.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "module:src": "src/index.ts",

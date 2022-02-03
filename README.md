@@ -30,15 +30,22 @@ If you want the animation to be paused whenever the element is hidden from the v
 
 ## Available options
 
-| Attribute              | Default value  | Description                                        |
-| ---------------------- | -------------- | -------------------------------------------------- |
-| `initial`              | `0`            | the initial number to start from                   |
-| `final`                | the text value | the final number                                   |
-| `formatted`            |                | whether to format the text (Intl.NumberFormat)     |
-| `duration`             | `3000`         | the duration of the animation                      |
-| `step`                 | `32`           | the interval between each increase (milliseconds). |
-| `pause-when-invisible` | `false`        | whether to pause when out of view                  |
-| `root-margin`          | `0px`          | the root margins for the IntersectionObserver.     |
+| Attribute              | Default value  | Description                                                             |
+| ---------------------- | -------------- | ----------------------------------------------------------------------- |
+| `initial`              | `0`            | the initial number to start from                                        |
+| `final`                | the text value | the final number                                                        |
+| `formatted`            |                | whether to format the text (Intl.NumberFormat)                          |
+| `custom-format`        |                | a custom format to be used (use '#' for the digits. E.g. `### ### ###`) |
+| `duration`             | `3000`         | the duration of the animation                                           |
+| `step`                 | `32`           | the interval between each increase (milliseconds).                      |
+| `pause-when-invisible` | `false`        | whether to pause when out of view                                       |
+| `root-margin`          | `0px`          | the root margins for the IntersectionObserver.                          |
+
+\*\*The custom format is also automatically "read" from the content if you do not provide the "final" attribute. For example, for the component below the custom format will be inferred to be `# ### ###`.
+
+```html
+<number-counter>1 230 502</number-counter>
+```
 
 ## Available methods
 

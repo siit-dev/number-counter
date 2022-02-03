@@ -12,6 +12,9 @@ export class NumberCounter extends LitElement {
   @property({ type: Boolean })
   formatted: boolean = false;
 
+  @property({ type: String, attribute: 'custom-format' })
+  customFormat: string = null;
+
   @property({ type: Number })
   duration: number = 3000;
 
@@ -51,8 +54,7 @@ export class NumberCounter extends LitElement {
     });
   };
 
-  private _formatter: Intl.NumberFormat;
-
+  private static _formatter: Intl.NumberFormat;
   private _interval = null;
 
   private _start = () => {
@@ -106,19 +108,60 @@ export class NumberCounter extends LitElement {
 
   private _getFormattedValue(value: number): number | string {
     if (this.formatted) {
-      return this._formatter.format(value);
+      return NumberCounter._formatter.format(value);
+    }
+    if (this.customFormat) {
+      return this._applyCustomFormat(value);
     }
     return value;
   }
 
+  private _applyCustomFormat(value: number): number | string {
+    if (!this.customFormat) {
+      return value;
+    }
+
+    // replace the digits in the format, one by one...
+    let result: string[] = this.customFormat.split('');
+    const digits = value.toString().split('');
+    const length = digits.length;
+    let lastIndex: number;
+    for (let i = length - 1; i >= 0; i--) {
+      lastIndex = result.lastIndexOf('#');
+      result[lastIndex] = digits[i];
+    }
+
+    console.log('applying', digits.join(''), result.join(''));
+
+    // only return the part of the pattern that has been used
+    return result.join('').substring(lastIndex);
+  }
+
+  private _parseOriginal(): number {
+    // get the inner text.. for some reason, innerText on the component returns empty
+    const div = document.createElement('div');
+    div.innerHTML = this.innerHTML;
+    const content = div.innerText.trim();
+    div.remove();
+
+    // save the format
+    if (!this.customFormat && content.match(/[^\d]/) && content.match(/\d/)) {
+      this.customFormat = content.replace(/\d/g, '#');
+    }
+
+    // save only the numbers
+    const value = parseInt(content.replace(/[^\d]/g, ''));
+    return isFinite(value) ? value : 0;
+  }
+
   constructor() {
     super();
-    this._formatter = Intl.NumberFormat(document.documentElement.lang);
+    NumberCounter._formatter ||= Intl.NumberFormat(document.documentElement.lang);
   }
 
   connectedCallback() {
     super.connectedCallback();
-    this.final = this.final || parseInt(this.innerHTML) || 100;
+    this.final = this.final || this._parseOriginal() || 100;
     this.innerHTML = '';
 
     this._observer =
