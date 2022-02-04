@@ -1,6 +1,6 @@
 # Animated number counter web component
 
-This library allows developers to easily create an animated number counter.
+This library allows developers to easily create an animated number counter. ([Demo](https://siit-dev.github.io/number-counter/))
 
 ## How to install
 
